@@ -3,12 +3,12 @@ const simpleTest = [
     {
       name: "tag-for-link",
       question: "Який тег використовується для створення посилання?",
-      answerOptions: ["<a>", "<link>", "<href>", "<src>"],
+      answerOptions: ["&lt;a&gt;", "&lt;link&gt;", "&lt;href&gt;", "&lt;src&gt;"],
       correctAnswer: "<a>",
     },
     {
       name: "alt-signature",
-      question: "Що відображає браузер, якщо тегу <img> не вистачає атрибуту src?",
+      question: "Що відображає браузер, якщо тегу &lt;img&gt; не вистачає атрибуту src?",
       answerOptions: [
         "Порожнє місце",
         "Помилка '404 Not Found'",
@@ -32,10 +32,10 @@ const simpleTest = [
       name: "doctype",
       question: "Що з наведеного є правильним оголошенням DOCTYPE для HTML5?",
       answerOptions: [
-        "<!DOCTYPE html>",
-        "<DOCTYPE html>",
-        "<!DOCTYPE HTML5>",
-        "<HTML5 DOCTYPE>",
+        "&lt;!DOCTYPE html&gt;",
+        "&lt;DOCTYPE html&gt;",
+        "&lt;!DOCTYPE HTML5&gt;",
+        "&lt;HTML5 DOCTYPE&gt;",
       ],
       correctAnswer: "<!DOCTYPE html>",
     },
@@ -43,10 +43,10 @@ const simpleTest = [
       name: "inline-element",
       question: "Який тег використовується для створення рядкового елемента?",
       answerOptions: [
-        "<span>",
-        "<div>",
-        "<section>",
-        "<article>",
+        "&lt;span&gt;",
+        "&lt;div&gt;",
+        "&lt;section&gt;",
+        "&lt;article&gt;",
       ],
       correctAnswer: "<span>",
     },
@@ -56,26 +56,26 @@ const simpleTest = [
     {
       name: "structural-tags",
       question: "Які з наведених тегів є структурними елементами HTML-документа?",
-      answerOptions: ["<header>", "<footer>", "<style>", "<section>", "<picture>"],
+      answerOptions: ["&lt;header&gt;", "&lt;footer&gt;", "&lt;style&gt;", "&lt;section&gt;", "&lt;picture&gt;"],
       correctAnswers: ["<header>", "<footer>", "<section>"],
     },
     {
       name: "table-tags",
       question: "Які з цих тегів використовуються для роботи з таблицями?",
-      answerOptions: ["<table>", "<tr>", "<th>", "<svg>", "<video>"],
+      answerOptions: ["&lt;table&gt;", "&lt;tr&gt;", "&lt;th&gt;", "&lt;img&gt;>", "&lt;video&gt;"],
       correctAnswers: ["<table>", "<tr>", "<th>"],
     },
     {
       name: "input-types",
-      question: "Які з цих значень може набувати атрибут type у тезі <input>?",
+      question: "Які з цих значень може набувати атрибут type у тезі &lt;input&gt;?",
       answerOptions: ["text", "number", "date", "password", "button"],
       correctAnswers: ["text", "number", "date", "password"],
     },
     {
       name: "list-tags",
       question: "Які з цих тегів використовуються для створення списків?",
-      answerOptions: ["<ul>", "<ol>", "<li>", "<div>", "<p>"],
-      correctAnswers: ["<ul>", "<ol>", "<li>"],
+      answerOptions: ["&lt;ul&gt;", "&lt;ol&gt;", "&lt;li&gt;", "&lt;div&gt;", "&lt;p&gt;"],
+      correctAnswers: ["&lt;ul>", "&lt;ol&gt;", "&lt;li&gt;"],
     },
   ],},
 
@@ -83,12 +83,12 @@ const simpleTest = [
     {
       name: "video-tag",
       question: "Виберіть, який тег використовується для додавання мультимедіа (відео)?",
-      answerOptions: ["<audio>", "<video>", "<source>", "<iframe>", "<form>"],
+      answerOptions: ["&lt;audio&gt;", "&lt;ideo&gt;", "&lt;source&gt;", "&lt;iframe&gt;", "&lt;form&gt;"],
       correctAnswer: "<video>",
     },
     {
       name: "atribute-for-img",
-      question: "Виберіть, який атрибут використовується для вказання URL-адреси зображення в тегу <img>",
+      question: "Виберіть, який атрибут використовується для вказання URL-адреси зображення в тегу &lt;img&gt;",
       answerOptions: ["href", "src", "alt", "url", "a"],
       correctAnswer: "src",
     },
@@ -111,10 +111,10 @@ const simpleTest = [
       name: "tags-to-purpose",
       question: "Співставте HTML-теги з їхнім призначенням:",
       matchPairs: [
-        { tag: "<a>", purpose: "Посилання" },
-        { tag: "<br>", purpose: "Перенос рядка" },
-        { tag: "<strong>", purpose: "Виділення жирним текстом" },
-        { tag: "<div>", purpose: "Блок елемент" },
+        { tag: "&lt;a&gt;", purpose: "Посилання" },
+        { tag: "&lt;br&gt;", purpose: "Перенос рядка" },
+        { tag: "&lt;strong&gt;", purpose: "Виділення жирним текстом" },
+        { tag: "&lt;div&gt;", purpose: "Блок елемент" },
       ],
     },
     {
@@ -131,10 +131,10 @@ const simpleTest = [
       name: "table-elements",
       question: "Співставте елементи таблиці з їхнім призначенням:",
       matchPairs: [
-        { element: "<table>", purpose: "Створення таблиці" },
-        { element: "<tr>", purpose: "Створення рядка таблиці" },
-        { element: "<th>", purpose: "Заголовок колонки" },
-        { element: "<td>", purpose: "Дані в комірці" },
+        { element: "&lt;table&gt;", purpose: "Створення таблиці" },
+        { element: "&lt;tr&gt;", purpose: "Створення рядка таблиці" },
+        { element: "&lt;th&gt;", purpose: "Заголовок колонки" },
+        { element: "&lt;td&gt;", purpose: "Дані в комірці" },
       ],
     },
   ],},
@@ -150,39 +150,106 @@ window.addEventListener("DOMContentLoaded", function () {
   // Показати запитання
   function showQuestion() {
     const formContainer = document.querySelector("#form-container");
-    const headerContainer = document.querySelector("#header-container");
-
-    formContainer.innerHTML = "";
-
+    formContainer.innerHTML = ""; // Очищаємо попередній вміст
+  
+    // Вибираємо випадкові запитання
     const radioQuestions = getRandomQuestions(simpleTest[0].radioQuestions, 4);
     const checkboxQuestions = getRandomQuestions(simpleTest[1].checkboxQuestions, 3);
     const selectQuestions = getRandomQuestions(simpleTest[2].selectQuestions, 2);
     const matchQuestions = getRandomQuestions(simpleTest[3].matchQuestions, 1);
-
+  
+    // Об'єднуємо всі запитання
     const allQuestions = [
       ...radioQuestions,
       ...checkboxQuestions,
       ...selectQuestions,
       ...matchQuestions,
     ];
-
+  
     allQuestions.forEach((question, index) => {
       const questionContainer = document.createElement("div");
       questionContainer.classList.add("question-item");
-
-      // Номер запитання
-      const numberTemplate = `<div class="question-number-container">
-                  <span class="question-number">${index + 1}</span>
-              </div>`;
-      headerContainer.innerHTML = numberTemplate;
-
-      // Назва та контент запитання
-      let questionTemplate = `<p class="question">${question.question}</p>`;
+  
+      // Шаблон для тексту запитання
+      const questionTemplate = `
+        <div class="question-number-container">
+          <span class="question-number">${index + 1}.</span>
+        </div>
+        <p class="question">${question.question}</p>
+      `;
       questionContainer.innerHTML = questionTemplate;
-
+  
+      // Ініціалізуємо шаблон для відповідей
+      let answersTemplate = "";
+  
+      // Логіка для Radio-питань
+      if (simpleTest[0].radioQuestions.includes(question)) {
+        answersTemplate = question.answerOptions
+          .map(
+            (option) => `
+            <label>
+              <input type="radio" name="question-${index}" value="${option}">
+              ${option}
+            </label>`
+          )
+          .join("");
+      }
+  
+      // Логіка для Checkbox-питань
+      else if (simpleTest[1].checkboxQuestions.includes(question)) {
+        answersTemplate = question.answerOptions
+          .map(
+            (option) => `
+            <label>
+              <input type="checkbox" name="question-${index}" value="${option}">
+              ${option}
+            </label>`
+          )
+          .join("");
+      }
+  
+      // Логіка для Select-питань
+      else if (simpleTest[2].selectQuestions.includes(question)) {
+        answersTemplate = `
+          <select name="question-${index}">
+            ${question.answerOptions
+              .map(
+                (option) => `
+              <option value="${option}">${option}</option>`
+              )
+              .join("")}
+          </select>
+        `;
+      }
+  
+      // Логіка для Match-питань
+      else if (simpleTest[3].matchQuestions.includes(question)) {
+        answersTemplate = `
+          <div class="match-container">
+            ${question.matchPairs
+              .map(
+                (pair) => `
+              <div class="match-pair">
+                <span>${pair.tag || pair.element || pair.attribute}</span>
+                <input type="text" placeholder="Співставлення">
+              </div>`
+              )
+              .join("")}
+          </div>
+        `;
+      }
+  
+      // Додаємо відповіді до питання
+      const answersContainer = document.createElement("div");
+      answersContainer.classList.add("answers-container");
+      answersContainer.innerHTML = answersTemplate;
+  
+      questionContainer.appendChild(answersContainer);
       formContainer.appendChild(questionContainer);
     });
   }
+  
 
   showQuestion();
 });
+
