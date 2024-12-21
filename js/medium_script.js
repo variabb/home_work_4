@@ -1,4 +1,4 @@
-const simpleTest = [
+const mediumTest = [
   {
     radioQuestions: [
       {
@@ -14,40 +14,46 @@ const simpleTest = [
         correctAnswer: "<a href='net.pdf' download>CV</a>",
       },
       {
-        name: "alt-signature",
+        name: "meta-tag",
         question:
-          "Що відображає браузер, якщо тегу &lt;img&gt; не вистачає атрибуту src?",
-        answerOptions: ["1", "2", "3", "4"],
-        correctAnswer: "3",
-      },
-      {
-        name: "alt-atribute",
-        question:
-          "Який атрибут використовується для вказання альтернативного тексту для зображення?",
-        answerOptions: ["alt", "src", "title", "href"],
-        correctAnswer: "alt",
-      },
-      {
-        name: "doctype",
-        question: "Що з наведеного є правильним оголошенням DOCTYPE для HTML5?",
+          "Який тег використовується для вказання мета-інформації про HTML-документ?",
         answerOptions: [
-          "&lt;!DOCTYPE html&gt;",
-          "&lt;DOCTYPE html&gt;",
-          "&lt;!DOCTYPE HTML5&gt;",
-          "&lt;HTML5 DOCTYPE&gt;",
+          "&lt;meta&gt;",
+          "&lt;head&gt;",
+          "&lt;title&gt;",
+          "&lt;link&gt;",
         ],
-        correctAnswer: "<!DOCTYPE html>",
+        correctAnswer: "<meta>",
       },
       {
-        name: "inline-element",
-        question: "Який тег використовується для створення рядкового елемента?",
+        name: "css-in-html",
+        question:
+          "Який атрибут використовується для додавання CSS-стилів безпосередньо до HTML-елемента?",
+        answerOptions: ["style", "class", "id", "css"],
+        correctAnswer: "style",
+      },
+      {
+        name: "semantic-tags",
+        question: "Який з тегів є семантичним у HTML5?",
         answerOptions: [
-          "&lt;span&gt;",
-          "&lt;div&gt;",
-          "&lt;section&gt;",
           "&lt;article&gt;",
+          "&lt;div&gt;",
+          "&lt;span&gt;",
+          "&lt;font&gt;",
         ],
-        correctAnswer: "<span>",
+        correctAnswer: "<article>",
+      },
+      {
+        name: "favicon",
+        question:
+          "Який тег використовується для додавання іконки сайту (favicon)?",
+        answerOptions: [
+          "&lt;link&gt;",
+          "&lt;meta&gt;",
+          "&lt;icon&gt;",
+          "&lt;head&gt;",
+        ],
+        correctAnswer: "<link>",
       },
     ],
   },
@@ -55,48 +61,46 @@ const simpleTest = [
   {
     checkboxQuestions: [
       {
-        name: "structural-tags",
-        question:
-          "Які з наведених тегів є структурними елементами HTML-документа?",
+        name: "global-attributes",
+        question: "Які з наведених є глобальними атрибутами HTML?",
+        answerOptions: ["id", "class", "style", "src", "alt"],
+        correctAnswers: ["id", "class", "style"],
+      },
+      {
+        name: "html5-tags",
+        question: "Які з цих тегів додані в HTML5?",
         answerOptions: [
           "&lt;header&gt;",
           "&lt;footer&gt;",
-          "&lt;style&gt;",
-          "&lt;section&gt;",
-          "&lt;picture&gt;",
+          "&lt;aside&gt;",
+          "&lt;font&gt;",
+          "&lt;blink&gt;",
         ],
-        correctAnswers: ["<header>", "<footer>", "<section>"],
+        correctAnswers: ["<header>", "<footer>", "<aside>"],
       },
       {
-        name: "table-tags",
-        question: "Які з цих тегів використовуються для роботи з таблицями?",
+        name: "input-attributes",
+        question: "Які атрибути можуть бути використані з тегом &lt;input&gt;?",
         answerOptions: [
-          "&lt;table&gt;",
-          "&lt;tr&gt;",
-          "&lt;th&gt;",
-          "&lt;img&gt;",
+          "placeholder",
+          "required",
+          "disabled",
+          "loop",
+          "controls",
+        ],
+        correctAnswers: ["placeholder", "required", "disabled"],
+      },
+      {
+        name: "media-elements",
+        question: "Які теги використовуються для роботи з мультимедіа?",
+        answerOptions: [
+          "&lt;audio&gt;",
           "&lt;video&gt;",
+          "&lt;source&gt;",
+          "&lt;track&gt;",
+          "&lt;script&gt;",
         ],
-        correctAnswers: ["<table>", "<tr>", "<th>"],
-      },
-      {
-        name: "input-types",
-        question:
-          "Які з цих значень може набувати атрибут type у тезі &lt;input&gt;?",
-        answerOptions: ["text", "number", "date", "password", "button"],
-        correctAnswers: ["text", "number", "date", "password", "button"],
-      },
-      {
-        name: "list-tags",
-        question: "Які з цих тегів використовуються для створення списків?",
-        answerOptions: [
-          "&lt;ul&gt;",
-          "&lt;ol&gt;",
-          "&lt;li&gt;",
-          "&lt;div&gt;",
-          "&lt;p&gt;",
-        ],
-        correctAnswers: ["&lt;ul>", "&lt;ol&gt;", "&lt;li&gt;"],
+        correctAnswers: ["<audio>", "<video>", "<source>", "<track>"],
       },
     ],
   },
@@ -104,38 +108,31 @@ const simpleTest = [
   {
     selectQuestions: [
       {
-        name: "video-tag",
-        question:
-          "Виберіть, який тег використовується для додавання мультимедіа (відео)?",
-        answerOptions: [
-          "&lt;audio&gt;",
-          "&lt;video&gt;",
-          "&lt;source&gt;",
-          "&lt;iframe&gt;",
-          "&lt;form&gt;",
-        ],
-        correctAnswer: "<video>",
+        name: "form-method",
+        question: "Який атрибут форми вказує метод передачі даних?",
+        answerOptions: ["method", "action", "type", "name"],
+        correctAnswer: "method",
       },
       {
-        name: "atribute-for-img",
+        name: "table-attributes",
         question:
-          "Виберіть, який атрибут використовується для вказання URL-адреси зображення в тегу &lt;img&gt;",
-        answerOptions: ["href", "src", "alt", "url", "a"],
+          "Який атрибут використовується для об'єднання кількох колонок у таблиці?",
+        answerOptions: ["colspan", "rowspan", "merge", "span"],
+        correctAnswer: "colspan",
+      },
+      {
+        name: "input-file",
+        question:
+          "Яке значення атрибута type використовується для створення поля завантаження файлів?",
+        answerOptions: ["file", "upload", "submit", "text"],
+        correctAnswer: "file",
+      },
+      {
+        name: "iframe-attribute",
+        question:
+          "Який атрибут використовується для вказання URL у тезі &lt;iframe&gt;?",
+        answerOptions: ["src", "href", "link", "url"],
         correctAnswer: "src",
-      },
-      {
-        name: "list-type",
-        question:
-          "Який атрибут використовується для зміни типу маркера в ненумерованому списку?",
-        answerOptions: ["type", "list", "style", "marker"],
-        correctAnswer: "type",
-      },
-      {
-        name: "input-placeholder",
-        question:
-          "Який атрибут використовується для додавання підказки у текстове поле?",
-        answerOptions: ["placeholder", "hint", "label", "value"],
-        correctAnswer: "placeholder",
       },
     ],
   },
@@ -143,38 +140,45 @@ const simpleTest = [
   {
     matchQuestions: [
       {
-        name: "tags-to-purpose",
+        name: "html-to-purpose",
         question: "Співставте HTML-теги з їхнім призначенням:",
         matchPairs: [
-          { element: "&lt;a&gt;", purpose: "Посилання" },
-          { element: "&lt;br&gt;", purpose: "Перенос рядка" },
-          { element: "&lt;strong&gt;", purpose: "Виділення жирним текстом" },
-          { element: "&lt;div&gt;", purpose: "Блок елемент" },
+          { element: "&lt;nav&gt;", purpose: "Навігація по сайту" },
+          {
+            element: "&lt;figure&gt;",
+            purpose: "Контейнер для зображень або схем",
+          },
+          {
+            element: "&lt;aside&gt;",
+            purpose: "Бічний контент або додаткова інформація",
+          },
+          { element: "&lt;main&gt;", purpose: "Основний контент сторінки" },
         ],
       },
       {
-        name: "attributes-to-use",
-        question: "Співставте атрибути з їхнім використанням:",
+        name: "attributes-to-purpose",
+        question: "Співставте атрибути з їхнім призначенням:",
         matchPairs: [
-          { element: "type", purpose: "Тип елемента форми (текст, пароль)" },
-          { element: "href", purpose: "Посилання на URL" },
-          { element: "src", purpose: "Джерело зображення або медіа" },
-          { element: "alt", purpose: "Альтернативний текст для зображення" },
+          { element: "autoplay", purpose: "Автоматичне відтворення медіа" },
+          { element: "required", purpose: "Обов'язкове поле форми" },
+          { element: "disabled", purpose: "Забороняє взаємодію з елементом" },
+          { element: "controls", purpose: "Показує елементи керування медіа" },
         ],
       },
       {
-        name: "table-elements",
-        question: "Співставте елементи таблиці з їхнім призначенням:",
+        name: "css-properties",
+        question: "Співставте CSS-властивості з їхнім призначенням:",
         matchPairs: [
-          { element: "&lt;table&gt;", purpose: "Створення таблиці" },
-          { element: "&lt;tr&gt;", purpose: "Створення рядка таблиці" },
-          { element: "&lt;th&gt;", purpose: "Заголовок колонки" },
-          { element: "&lt;td&gt;", purpose: "Дані в комірці" },
+          { element: "color", purpose: "Колір тексту" },
+          { element: "background-color", purpose: "Колір фону" },
+          { element: "margin", purpose: "Зовнішні відступи" },
+          { element: "padding", purpose: "Внутрішні відступи" },
         ],
       },
     ],
   },
 ];
+
 let radioQuestions, checkboxQuestions, selectQuestions, matchQuestions;
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -234,10 +238,10 @@ window.addEventListener("DOMContentLoaded", function () {
     formContainer.innerHTML = ""; // Очищаємо попередній вміст
 
     // Вибираємо випадкові запитання
-    radioQuestions = getRandomQuestions(simpleTest[0].radioQuestions, 4);
-    checkboxQuestions = getRandomQuestions(simpleTest[1].checkboxQuestions, 3);
-    selectQuestions = getRandomQuestions(simpleTest[2].selectQuestions, 2);
-    matchQuestions = getRandomQuestions(simpleTest[3].matchQuestions, 1);
+    radioQuestions = getRandomQuestions(mediumTest[0].radioQuestions, 4);
+    checkboxQuestions = getRandomQuestions(mediumTest[1].checkboxQuestions, 3);
+    selectQuestions = getRandomQuestions(mediumTest[2].selectQuestions, 2);
+    matchQuestions = getRandomQuestions(mediumTest[3].matchQuestions, 1);
 
     // Об'єднуємо всі запитання
     const allQuestions = [
@@ -262,7 +266,7 @@ window.addEventListener("DOMContentLoaded", function () {
       let answersTemplate = "";
 
       // Логіка для Radio-питань
-      if (simpleTest[0].radioQuestions.includes(question)) {
+      if (mediumTest[0].radioQuestions.includes(question)) {
         answersTemplate = question.answerOptions
           .map(
             (option) =>
@@ -275,7 +279,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Логіка для Checkbox-питань
-      else if (simpleTest[1].checkboxQuestions.includes(question)) {
+      else if (mediumTest[1].checkboxQuestions.includes(question)) {
         answersTemplate = question.answerOptions
           .map(
             (option) =>
@@ -288,7 +292,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Логіка для Select-питань
-      else if (simpleTest[2].selectQuestions.includes(question)) {
+      else if (mediumTest[2].selectQuestions.includes(question)) {
         answersTemplate = `
     <select name="question-${index}">
       ${question.answerOptions
@@ -299,7 +303,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Логіка для Match-питань
-      else if (simpleTest[3].matchQuestions.includes(question)) {
+      else if (mediumTest[3].matchQuestions.includes(question)) {
         const leftItems = question.matchPairs
           .map(
             (pair) =>
@@ -388,7 +392,7 @@ window.addEventListener("DOMContentLoaded", function () {
       let userAnswer = null;
 
       // Для Radio-питань
-      if (simpleTest[0].radioQuestions.includes(question)) {
+      if (mediumTest[0].radioQuestions.includes(question)) {
         const selectedRadio = document.querySelector(
           `input[name="question-${index}"]:checked`
         );
@@ -402,7 +406,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Для Checkbox-питань
-      else if (simpleTest[1].checkboxQuestions.includes(question)) {
+      else if (mediumTest[1].checkboxQuestions.includes(question)) {
         const selectedCheckboxes = document.querySelectorAll(
           `input[name="question-${index}"]:checked`
         );
@@ -419,7 +423,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Для Select-питань
-      else if (simpleTest[2].selectQuestions.includes(question)) {
+      else if (mediumTest[2].selectQuestions.includes(question)) {
         const selectedOption = document.querySelector(
           `select[name="question-${index}"]`
         );
@@ -433,7 +437,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Для Match-питань
-      else if (simpleTest[3].matchQuestions.includes(question)) {
+      else if (mediumTest[3].matchQuestions.includes(question)) {
         const inputs = document.querySelectorAll(
           `input[name="question-${index}"]`
         );
