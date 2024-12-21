@@ -1,5 +1,17 @@
 const mediumTest = [
   {
+    inputOutputQuestions: [
+      {
+        name: "h1-heading",
+        question:
+          "Напишіть код, який зробить 'Hello' головним заголовком сторінки.",
+        placeholder: "Введіть ваш HTML код тут...",
+        correctAnswer: "<h1>Hello</h1>",
+      },
+   
+    ],
+  },
+  {
     radioQuestions: [
       {
         name: "download-file",
@@ -57,7 +69,6 @@ const mediumTest = [
       },
     ],
   },
-
   {
     checkboxQuestions: [
       {
@@ -179,7 +190,11 @@ const mediumTest = [
   },
 ];
 
-let radioQuestions, checkboxQuestions, selectQuestions, matchQuestions;
+let inputOutputQuestions,
+  radioQuestions,
+  checkboxQuestions,
+  selectQuestions,
+  matchQuestions;
 
 window.addEventListener("DOMContentLoaded", function () {
   // Вибір рандомних запитань
@@ -187,8 +202,6 @@ window.addEventListener("DOMContentLoaded", function () {
     const shuffled = array.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
   }
-
-  // -------------------------------- DRAG AND DROP
 
   // ------------------------------- Drag-and-Drop без контейнера --------------------------
   function initializeDragAndDrop() {
@@ -231,104 +244,119 @@ window.addEventListener("DOMContentLoaded", function () {
 
   // Викликаємо ініціалізацію після завантаження сторінки
   initializeDragAndDrop();
+  // --------------------------------- INPUT
 
   // ------------------------------- функція Показати запитання --------------------------
   function showQuestion() {
     const formContainer = document.querySelector("#form-container");
-    formContainer.innerHTML = ""; // Очищаємо попередній вміст
+    formContainer.innerHTML = ""; // Очищуємо попередній вміст
 
-    // Вибираємо випадкові запитання
-    radioQuestions = getRandomQuestions(mediumTest[0].radioQuestions, 4);
-    checkboxQuestions = getRandomQuestions(mediumTest[1].checkboxQuestions, 3);
-    selectQuestions = getRandomQuestions(mediumTest[2].selectQuestions, 2);
-    matchQuestions = getRandomQuestions(mediumTest[3].matchQuestions, 1);
+    // Вибір випадкових запитань
+    const inputOutputQuestions = getRandomQuestions(
+      mediumTest[0].inputOutputQuestions,
+      1
+    );
+    const radioQuestions = getRandomQuestions(mediumTest[1].radioQuestions, 3);
+    const checkboxQuestions = getRandomQuestions(
+      mediumTest[2].checkboxQuestions,
+      3
+    );
+    const selectQuestions = getRandomQuestions(
+      mediumTest[3].selectQuestions,
+      2
+    );
+    const matchQuestions = getRandomQuestions(mediumTest[4].matchQuestions, 1);
 
     // Об'єднуємо всі запитання
     const allQuestions = [
+      ...inputOutputQuestions,
       ...radioQuestions,
       ...checkboxQuestions,
       ...selectQuestions,
       ...matchQuestions,
     ];
 
+    // Обробка кожного запитання
     allQuestions.forEach((question, index) => {
       const questionContainer = document.createElement("div");
       questionContainer.classList.add("question-item");
 
       // Шаблон для тексту запитання
-      const questionTemplate = `  <div class="question-number-container">
-          <span class="question-number">${index + 1}.</span>
-        </div>
-        <p class="question">${question.question}</p>`;
+      const questionTemplate = `
+      <div class="question-number-container">
+        <span class="question-number">${index + 1}.</span>
+      </div>
+      <p class="question">${question.question}</p>
+    `;
       questionContainer.innerHTML = questionTemplate;
 
       // Ініціалізуємо шаблон для відповідей
       let answersTemplate = "";
 
-      // Логіка для Radio-питань
-      if (mediumTest[0].radioQuestions.includes(question)) {
-        answersTemplate = question.answerOptions
-          .map(
-            (option) =>
-              `  <label>
-              <input type="radio" name="question-${index}" value="${option}">
-              ${option}
-            </label>`
-          )
-          .join("");
-      }
-
-      // Логіка для Checkbox-питань
-      else if (mediumTest[1].checkboxQuestions.includes(question)) {
-        answersTemplate = question.answerOptions
-          .map(
-            (option) =>
-              `  <label>
-              <input type="checkbox" name="question-${index}" value="${option}">
-              ${option}
-            </label>`
-          )
-          .join("");
-      }
-
-      // Логіка для Select-питань
-      else if (mediumTest[2].selectQuestions.includes(question)) {
+      if (mediumTest[0].inputOutputQuestions.includes(question)) {
         answersTemplate = `
-    <select name="question-${index}">
-      ${question.answerOptions
-        .map((option) => `<option value="${option}">${option}</option>`)
-        .join("")}
-    </select>
-  `;
+        <textarea 
+          name="input-question-${index}" 
+          placeholder="${question.placeholder || "Введіть відповідь"}" 
+          rows="3" 
+          class="input-code-area"></textarea>
+      `;
       }
-
-      // Логіка для Match-питань
-      else if (mediumTest[3].matchQuestions.includes(question)) {
+      else if (mediumTest[1].radioQuestions.includes(question)) {
+        answersTemplate = question.answerOptions
+          .map(
+            (option) => `
+          <label>
+            <input type="radio" name="question-${index}" value="${option}">
+            ${option}
+          </label>`
+          )
+          .join("");
+      } else if (mediumTest[2].checkboxQuestions.includes(question)) {
+        answersTemplate = question.answerOptions
+          .map(
+            (option) => `
+          <label>
+            <input type="checkbox" name="question-${index}" value="${option}">
+            ${option}
+          </label>`
+          )
+          .join("");
+      } else if (mediumTest[3].selectQuestions.includes(question)) {
+        answersTemplate = `
+        <select name="question-${index}">
+          ${question.answerOptions
+            .map((option) => `<option value="${option}">${option}</option>`)
+            .join("")}
+        </select>
+      `;
+      } else if (mediumTest[4].matchQuestions.includes(question)) {
         const leftItems = question.matchPairs
           .map(
-            (pair) =>
-              `<div class="draggable-item" draggable="true" data-value="${pair.element}">
-          ${pair.element}
-        </div>`
+            (pair) => `
+          <div class="draggable-item" draggable="true" data-value="${pair.element}">
+            ${pair.element}
+          </div>`
           )
           .join("");
 
         const rightItems = question.matchPairs
           .map(
-            (pair) =>
-              `<div class="droppable-item" data-correct="${pair.purpose}">
-          ${pair.purpose}
-        </div>`
+            (pair) => `
+          <div class="droppable-item" data-correct="${pair.purpose}">
+            ${pair.purpose}
+          </div>`
           )
           .join("");
 
         answersTemplate = `
-    <div class="match-container">
-      <div class="left-column">${leftItems}</div>
-      <div class="right-column">${rightItems}</div>
-    </div>
-  `;
+        <div class="match-container">
+          <div class="left-column">${leftItems}</div>
+          <div class="right-column">${rightItems}</div>
+        </div>
+      `;
       }
+
       // Додаємо відповіді до питання
       const answersContainer = document.createElement("div");
       answersContainer.classList.add("answers-container");
@@ -338,6 +366,8 @@ window.addEventListener("DOMContentLoaded", function () {
       formContainer.appendChild(questionContainer);
     });
   }
+
+  // Виклик функції для показу запитань
   showQuestion();
 
   const matchContainers = document.querySelectorAll(".match-container");
@@ -377,9 +407,16 @@ window.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ------------------------------- функція перевірити відповіді --------------------------
+  // ------------------------------- функція перевірити відповіді -------------------------
   function checkAnswers() {
+    const inputOutputQuestions = mediumTest[0].inputOutputQuestions;
+    const radioQuestions = mediumTest[1].radioQuestions;
+    const checkboxQuestions = mediumTest[2].checkboxQuestions;
+    const selectQuestions = mediumTest[3].selectQuestions;
+    const matchQuestions = mediumTest[4].matchQuestions;
+
     const allQuestions = [
+      ...inputOutputQuestions,
       ...radioQuestions,
       ...checkboxQuestions,
       ...selectQuestions,
@@ -391,8 +428,28 @@ window.addEventListener("DOMContentLoaded", function () {
     allQuestions.forEach((question, index) => {
       let userAnswer = null;
 
+      if (inputOutputQuestions.includes(question)) {
+        const userInputElement = document.querySelector(
+          `textarea[name="input-question-${index}"]`
+        );
+
+        console.log(userInputElement); // Для перевірки
+
+        if (userInputElement) {
+          const userInput = userInputElement.value.trim(); // Обрізаємо пробіли
+          console.log(userInput); // Для перевірки введеного значення
+
+          // Порівнюємо відповідь із правильною
+          if (userInput === question.correctAnswer) {
+            score++;
+          }
+        } else {
+          console.warn(`Не знайдено textarea для input-question-${index}`);
+        }
+      }
+
       // Для Radio-питань
-      if (mediumTest[0].radioQuestions.includes(question)) {
+      else if (radioQuestions.includes(question)) {
         const selectedRadio = document.querySelector(
           `input[name="question-${index}"]:checked`
         );
@@ -406,7 +463,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Для Checkbox-питань
-      else if (mediumTest[1].checkboxQuestions.includes(question)) {
+      else if (checkboxQuestions.includes(question)) {
         const selectedCheckboxes = document.querySelectorAll(
           `input[name="question-${index}"]:checked`
         );
@@ -423,7 +480,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Для Select-питань
-      else if (mediumTest[2].selectQuestions.includes(question)) {
+      else if (selectQuestions.includes(question)) {
         const selectedOption = document.querySelector(
           `select[name="question-${index}"]`
         );
@@ -437,7 +494,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       // Для Match-питань
-      else if (mediumTest[3].matchQuestions.includes(question)) {
+      else if (matchQuestions.includes(question)) {
         const inputs = document.querySelectorAll(
           `input[name="question-${index}"]`
         );
@@ -456,6 +513,7 @@ window.addEventListener("DOMContentLoaded", function () {
     const scoreElement = document.getElementById("score");
     scoreElement.textContent = ` Ви набрали ${score} балів з ${allQuestions.length}.`;
   }
+
   // ------------------------------------------- МОДАЛКА
 
   // Викликаємо функцію перевірки при натисканні кнопки "send"
@@ -488,4 +546,3 @@ window.addEventListener("DOMContentLoaded", function () {
     openModal(); // Відкриваємо модальне вікно
   });
 });
-

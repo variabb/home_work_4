@@ -224,3 +224,12 @@ label {
   background-color: #f44336;
   color: white;
 }
+.input-code-area {
+  width: 90%;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  resize: vertical;
+}
