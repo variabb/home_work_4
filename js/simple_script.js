@@ -1,4 +1,3 @@
-
 const simpleTest = [
   {
     radioQuestions: [
@@ -101,7 +100,7 @@ const simpleTest = [
           "&lt;div&gt;",
           "&lt;p&gt;",
         ],
-        correctAnswers: ["&lt;ul>", "&lt;ol&gt;", "&lt;li&gt;"],
+        correctAnswers: ["<ul>", "<ol>", "<li>"],
       },
     ],
   },
@@ -393,84 +392,70 @@ window.addEventListener("DOMContentLoaded", function () {
       let userAnswer = null;
 
       // Для Radio-питань
-     if (simpleTest[0].radioQuestions.includes(question)) {
-       const selectedRadio = document.querySelector(
-         'input[name="question-${index}"]:checked'
-       );
-       if (selectedRadio) {
-         userAnswer = selectedRadio.value;
-         // Перевірка правильності відповіді
-         if (userAnswer === question.correctAnswer) {
-           score++;
-         }
-       }
-     }
+      if (simpleTest[0].radioQuestions.includes(question)) {
+        const selectedRadio = document.querySelector(
+          `input[name="question-${index}"]:checked`
+        );
+        if (selectedRadio) {
+          userAnswer = selectedRadio.value;
+          // Перевірка правильності відповіді
+          if (userAnswer === question.correctAnswer) {
+            score++;
+          }
+        }
+      }
 
-     // Для Checkbox-питань
-     else if (simpleTest[1].checkboxQuestions.includes(question)) {
-       const selectedCheckboxes = document.querySelectorAll(
-         'input[name="question-${index}"]:checked'
-       );
-       userAnswer = Array.from(selectedCheckboxes).map(
-         (checkbox) => checkbox.value
-       );
-       // Перевірка правильності відповіді
-       if (
-         JSON.stringify(userAnswer.sort()) ===
-         JSON.stringify(question.correctAnswers.sort())
-       ) {
-         score++;
-       }
-     }
+      // Для Checkbox-питань
+      else if (simpleTest[1].checkboxQuestions.includes(question)) {
+        const selectedCheckboxes = document.querySelectorAll(
+          `input[name="question-${index}"]:checked`
+        );
+        userAnswer = Array.from(selectedCheckboxes).map(
+          (checkbox) => checkbox.value
+        );
+        // Перевірка правильності відповіді
+        if (
+          JSON.stringify(userAnswer.sort()) ===
+          JSON.stringify(question.correctAnswers.sort())
+        ) {
+          score++;
+        }
+      }
 
-     // Для Select-питань
-     else if (simpleTest[2].selectQuestions.includes(question)) {
-       const selectedOption = document.querySelector(
-         `select[name="question-${index}"]`
-       );
-       if (selectedOption) {
-         userAnswer = selectedOption.value;
-         // Перевірка правильності відповіді
-         if (userAnswer === question.correctAnswer) {
-           score++;
-         }
-       }
-     }
+      // Для Select-питань
+      else if (simpleTest[2].selectQuestions.includes(question)) {
+        const selectedOption = document.querySelector(
+          `select[name="question-${index}"]`
+        );
+        if (selectedOption) {
+          userAnswer = selectedOption.value;
+          // Перевірка правильності відповіді
+          if (userAnswer === question.correctAnswer) {
+            score++;
+          }
+        }
+      }
 
-     // Для Match-питань
-     else if (simpleTest[3].matchQuestions.includes(question)) {
-       const questionContainer = document.querySelector(
-         `.question-item:nth-child(${index + 1})`
-       );
-
-       if (questionContainer) {
-         const droppables =
-           questionContainer.querySelectorAll(".droppable-item");
-         let isCorrect = true;
-
-         droppables.forEach((droppable) => {
-           const draggable = droppable.querySelector(".draggable-item");
-           if (
-             !draggable || // Якщо немає елемента
-             draggable.dataset.value.trim().toLowerCase() !==
-               droppable.dataset.correct.trim().toLowerCase() // Перевіряємо відповідність
-           ) {
-             isCorrect = false;
-           }
-         });
-
-         if (isCorrect) {
-           score++;
-         }
-       }
-     }
+      // Для Match-питань
+      else if (simpleTest[3].matchQuestions.includes(question)) {
+        const inputs = document.querySelectorAll(
+          `input[name="question-${index}"]`
+        );
+        userAnswer = Array.from(inputs).map((input) => input.value);
+        // Перевірка правильності відповіді
+        const correctAnswers = question.matchPairs.map((pair) => pair.purpose);
+        if (
+          JSON.stringify(userAnswer.sort()) ===
+          JSON.stringify(correctAnswers.sort())
+        ) {
+          score++;
+        }
+      }
     });
-
     console.log(`Ви набрали ${score} балів з ${allQuestions.length}`);
     const scoreElement = document.getElementById("score");
     scoreElement.textContent = ` Ви набрали ${score} балів з ${allQuestions.length}.`;
   }
-
   // ------------------------------------------- МОДАЛКА
 
   // Викликаємо функцію перевірки при натисканні кнопки "send"

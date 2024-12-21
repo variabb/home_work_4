@@ -6,24 +6,19 @@ const simpleTest = [
         question:
           "Обрери код, що дозволить користувачу завантажити файл net.pdf по кліку на посилання",
         answerOptions: [
-          '&lt;a href="net.pdf" download&gt;CV&lt;/a&gt;',
-          '&lt;a href="net.pdf" class="link"&gt;CV&lt;/a&gt;',
-          '&lt;a href="net.pdf" class="download"&gt;CV&lt;/a&gt;',
-          '&lt;a href="net.pdf" save&gt;CV&lt;/a&gt;',
+          "&lt;a href='net.pdf' download&gt;CV&lt;/a&gt;",
+          "&lt;a href='net.pdf' class='link'&gt;CV&lt;/a&gt;",
+          "&lt;a href='net.pdf' class='download'&gt;CV&lt;/a&gt;",
+          "&lt;a href='net.pdf' save&gt;CV&lt;/a&gt;",
         ],
-        correctAnswer: '<a href="net.pdf" download>CV</a>',
+        correctAnswer: "<a href='net.pdf' download>CV</a>",
       },
       {
         name: "alt-signature",
         question:
           "Що відображає браузер, якщо тегу &lt;img&gt; не вистачає атрибуту src?",
-        answerOptions: [
-          "1",
-          "2",
-          "3",
-          "4",
-        ],
-        correctAnswer: "4",
+        answerOptions: ["1", "2", "3", "4"],
+        correctAnswer: "3",
       },
       {
         name: "alt-atribute",
@@ -395,7 +390,7 @@ window.addEventListener("DOMContentLoaded", function () {
       // Для Radio-питань
       if (simpleTest[0].radioQuestions.includes(question)) {
         const selectedRadio = document.querySelector(
-          'input[name="question-${index}"]:checked'
+          `input[name="question-${index}"]:checked`
         );
         if (selectedRadio) {
           userAnswer = selectedRadio.value;
@@ -409,7 +404,7 @@ window.addEventListener("DOMContentLoaded", function () {
       // Для Checkbox-питань
       else if (simpleTest[1].checkboxQuestions.includes(question)) {
         const selectedCheckboxes = document.querySelectorAll(
-          'input[name="question-${index}"]:checked'
+          `input[name="question-${index}"]:checked`
         );
         userAnswer = Array.from(selectedCheckboxes).map(
           (checkbox) => checkbox.value
@@ -439,38 +434,24 @@ window.addEventListener("DOMContentLoaded", function () {
 
       // Для Match-питань
       else if (simpleTest[3].matchQuestions.includes(question)) {
-        const questionContainer = document.querySelector(
-          `.question-item:nth-child(${index + 1})`
+        const inputs = document.querySelectorAll(
+          `input[name="question-${index}"]`
         );
-
-        if (questionContainer) {
-          const droppables =
-            questionContainer.querySelectorAll(".droppable-item");
-          let isCorrect = true;
-
-          droppables.forEach((droppable) => {
-            const draggable = droppable.querySelector(".draggable-item");
-            if (
-              !draggable || // Якщо немає елемента
-              draggable.dataset.value.trim().toLowerCase() !==
-                droppable.dataset.correct.trim().toLowerCase() // Перевіряємо відповідність
-            ) {
-              isCorrect = false;
-            }
-          });
-
-          if (isCorrect) {
-            score++;
-          }
+        userAnswer = Array.from(inputs).map((input) => input.value);
+        // Перевірка правильності відповіді
+        const correctAnswers = question.matchPairs.map((pair) => pair.purpose);
+        if (
+          JSON.stringify(userAnswer.sort()) ===
+          JSON.stringify(correctAnswers.sort())
+        ) {
+          score++;
         }
       }
     });
-
     console.log(`Ви набрали ${score} балів з ${allQuestions.length}`);
     const scoreElement = document.getElementById("score");
     scoreElement.textContent = ` Ви набрали ${score} балів з ${allQuestions.length}.`;
   }
-
   // ------------------------------------------- МОДАЛКА
 
   // Викликаємо функцію перевірки при натисканні кнопки "send"
@@ -503,3 +484,4 @@ window.addEventListener("DOMContentLoaded", function () {
     openModal(); // Відкриваємо модальне вікно
   });
 });
+
