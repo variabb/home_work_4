@@ -1,29 +1,29 @@
-
 const simpleTest = [
   {
     radioQuestions: [
       {
-        name: "tag-for-link",
-        question: "Який тег використовується для створення посилання?",
+        name: "download-file",
+        question:
+          "Обрери код, що дозволить користувачу завантажити файл net.pdf по кліку на посилання",
         answerOptions: [
-          "&lt;a&gt;",
-          "&lt;link&gt;",
-          "&lt;href&gt;",
-          "&lt;src&gt;",
+          '&lt;a href="net.pdf" download&gt;CV&lt;/a&gt;',
+          '&lt;a href="net.pdf" class="link"&gt;CV&lt;/a&gt;',
+          '&lt;a href="net.pdf" class="download"&gt;CV&lt;/a&gt;',
+          '&lt;a href="net.pdf" save&gt;CV&lt;/a&gt;',
         ],
-        correctAnswer: "<a>",
+        correctAnswer: '<a href="net.pdf" download>CV</a>',
       },
       {
         name: "alt-signature",
         question:
           "Що відображає браузер, якщо тегу &lt;img&gt; не вистачає атрибуту src?",
         answerOptions: [
-          "Порожнє місце",
-          "Помилка '404 Not Found'",
-          "Текст з атрибуту alt",
-          "Зображення не відображається",
+          "1",
+          "2",
+          "3",
+          "4",
         ],
-        correctAnswer: "Текст з атрибуту alt",
+        correctAnswer: "4",
       },
       {
         name: "alt-atribute",
@@ -393,77 +393,77 @@ window.addEventListener("DOMContentLoaded", function () {
       let userAnswer = null;
 
       // Для Radio-питань
-     if (simpleTest[0].radioQuestions.includes(question)) {
-       const selectedRadio = document.querySelector(
-         'input[name="question-${index}"]:checked'
-       );
-       if (selectedRadio) {
-         userAnswer = selectedRadio.value;
-         // Перевірка правильності відповіді
-         if (userAnswer === question.correctAnswer) {
-           score++;
-         }
-       }
-     }
+      if (simpleTest[0].radioQuestions.includes(question)) {
+        const selectedRadio = document.querySelector(
+          'input[name="question-${index}"]:checked'
+        );
+        if (selectedRadio) {
+          userAnswer = selectedRadio.value;
+          // Перевірка правильності відповіді
+          if (userAnswer === question.correctAnswer) {
+            score++;
+          }
+        }
+      }
 
-     // Для Checkbox-питань
-     else if (simpleTest[1].checkboxQuestions.includes(question)) {
-       const selectedCheckboxes = document.querySelectorAll(
-         'input[name="question-${index}"]:checked'
-       );
-       userAnswer = Array.from(selectedCheckboxes).map(
-         (checkbox) => checkbox.value
-       );
-       // Перевірка правильності відповіді
-       if (
-         JSON.stringify(userAnswer.sort()) ===
-         JSON.stringify(question.correctAnswers.sort())
-       ) {
-         score++;
-       }
-     }
+      // Для Checkbox-питань
+      else if (simpleTest[1].checkboxQuestions.includes(question)) {
+        const selectedCheckboxes = document.querySelectorAll(
+          'input[name="question-${index}"]:checked'
+        );
+        userAnswer = Array.from(selectedCheckboxes).map(
+          (checkbox) => checkbox.value
+        );
+        // Перевірка правильності відповіді
+        if (
+          JSON.stringify(userAnswer.sort()) ===
+          JSON.stringify(question.correctAnswers.sort())
+        ) {
+          score++;
+        }
+      }
 
-     // Для Select-питань
-     else if (simpleTest[2].selectQuestions.includes(question)) {
-       const selectedOption = document.querySelector(
-         `select[name="question-${index}"]`
-       );
-       if (selectedOption) {
-         userAnswer = selectedOption.value;
-         // Перевірка правильності відповіді
-         if (userAnswer === question.correctAnswer) {
-           score++;
-         }
-       }
-     }
+      // Для Select-питань
+      else if (simpleTest[2].selectQuestions.includes(question)) {
+        const selectedOption = document.querySelector(
+          `select[name="question-${index}"]`
+        );
+        if (selectedOption) {
+          userAnswer = selectedOption.value;
+          // Перевірка правильності відповіді
+          if (userAnswer === question.correctAnswer) {
+            score++;
+          }
+        }
+      }
 
-     // Для Match-питань
-     else if (simpleTest[3].matchQuestions.includes(question)) {
-       const questionContainer = document.querySelector(
-         `.question-item:nth-child(${index + 1})`
-       );
+      // Для Match-питань
+      else if (simpleTest[3].matchQuestions.includes(question)) {
+        const questionContainer = document.querySelector(
+          `.question-item:nth-child(${index + 1})`
+        );
 
-       if (questionContainer) {
-         const droppables =
-           questionContainer.querySelectorAll(".droppable-item");
-         let isCorrect = true;
+        if (questionContainer) {
+          const droppables =
+            questionContainer.querySelectorAll(".droppable-item");
+          let isCorrect = true;
 
-         droppables.forEach((droppable) => {
-           const draggable = droppable.querySelector(".draggable-item");
-           if (
-             !draggable || // Якщо немає елемента
-             draggable.dataset.value.trim().toLowerCase() !==
-               droppable.dataset.correct.trim().toLowerCase() // Перевіряємо відповідність
-           ) {
-             isCorrect = false;
-           }
-         });
+          droppables.forEach((droppable) => {
+            const draggable = droppable.querySelector(".draggable-item");
+            if (
+              !draggable || // Якщо немає елемента
+              draggable.dataset.value.trim().toLowerCase() !==
+                droppable.dataset.correct.trim().toLowerCase() // Перевіряємо відповідність
+            ) {
+              isCorrect = false;
+            }
+          });
 
-         if (isCorrect) {
-           score++;
-         }
-       }
-     }
+          if (isCorrect) {
+            score++;
+          }
+        }
+      }
     });
 
     console.log(`Ви набрали ${score} балів з ${allQuestions.length}`);
