@@ -31,3 +31,23 @@
   text-decoration: none;
   cursor: pointer;
 }
+.draggable-item {
+  cursor: grab;
+  background-color: #f0f0f0;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.droppable-item {
+  border: 2px dashed #ccc;
+  min-height: 30px;
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.droppable-item.dragover {
+  border-color: #00f;
+  background-color: #e0e0ff;
+}

@@ -261,30 +261,30 @@ window.addEventListener("DOMContentLoaded", function () {
       // Логіка для Match-питань
       else if (simpleTest[3].matchQuestions.includes(question)) {
         const leftItems = question.matchPairs
-          .map((pair) => (
-           ` <div
-              class="draggable-item"
-              draggable="true"
-              data-value="${pair.tag || pair.element || pair.attribute}"
-            >
-              ${pair.tag || pair.element || pair.attribute}
-            </div>`
-          ))
+          .map(
+            (pair) =>
+              `<div class="draggable-item" draggable="true" data-value="${pair.element}">
+          ${pair.element}
+        </div>`
+          )
           .join("");
+
         const rightItems = question.matchPairs
-          .map((pair) => (
-            `<div class="droppable-item" data-correct="${pair.purpose}"></div>`
-          ))
+          .map(
+            (pair) =>
+              `<div class="droppable-item" data-correct="${pair.purpose}">
+          ${pair.purpose}
+        </div>`
+          )
           .join("");
 
-        answersTemplate = (
-          `<div class="match-container">
-            <div class="left-column">${leftItems}</div>
-            <div class="right-column">${rightItems}</div>
-          </div>`
-        );
+        answersTemplate = `
+    <div class="match-container">
+      <div class="left-column">${leftItems}</div>
+      <div class="right-column">${rightItems}</div>
+    </div>
+  `;
       }
-
       // Додаємо відповіді до питання
       const answersContainer = document.createElement("div");
       answersContainer.classList.add("answers-container");
