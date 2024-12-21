@@ -187,6 +187,14 @@ window.addEventListener("DOMContentLoaded", function () {
     const shuffled = array.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
   }
+  // Функція для випадкового перемішування елементів масиву (Fisher-Yates Shuffle)
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // Генеруємо випадковий індекс
+      [array[i], array[j]] = [array[j], array[i]]; // Міняємо місцями елементи
+    }
+    return array;
+  }
 
   // -------------------------------- DRAG AND DROP
 
@@ -267,7 +275,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
       // Логіка для Radio-питань
       if (simpleTest[0].radioQuestions.includes(question)) {
-        answersTemplate = question.answerOptions
+        const shuffledAnswers = shuffleArray([...question.answerOptions]);
+        answersTemplate = shuffledAnswers
           .map(
             (option) =>
               `  <label>
@@ -280,7 +289,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
       // Логіка для Checkbox-питань
       else if (simpleTest[1].checkboxQuestions.includes(question)) {
-        answersTemplate = question.answerOptions
+        const shuffledAnswers = shuffleArray([...question.answerOptions]);
+        answersTemplate = shuffledAnswers
           .map(
             (option) =>
               `  <label>
@@ -293,6 +303,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
       // Логіка для Select-питань
       else if (simpleTest[2].selectQuestions.includes(question)) {
+        const shuffledAnswers = shuffleArray([...question.answerOptions]);
         answersTemplate = `
     <select name="question-${index}">
       ${question.answerOptions
